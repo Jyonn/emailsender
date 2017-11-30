@@ -1,20 +1,21 @@
-# Import smtplib for the actual sending function
 import smtplib
-
-# Import the email modules we'll need
 from email.mime.text import MIMEText
+from email.header import Header
 
-# Open a plain text file for reading.  For this example, assume that
-# the text file contains only ASCII characters.
-msg = MIMEText("just a text mail")
+sender = 'i@hiphop.6-79.cn'
+receivers = ['i@6-79.cn']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
-# me == the sender's email address
-# you == the recipient's email address
-msg['Subject'] = 'The contents of code named strawberry'
-msg['From'] = 'noreply@mail.6-79.cn'
-msg['To'] = 'i@6-79.cn'
+# 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码
+message = MIMEText('Python 邮件发送测试...', 'plain', 'utf-8')
+message['From'] = Header("菜鸟教程", 'utf-8')
+message['To'] = Header("测试", 'utf-8')
 
-# Send the message via our own SMTP server.
-s = smtplib.SMTP('smtp.qq.com', 465)
-s.send_message(msg)
-s.quit()
+subject = 'Python SMTP 邮件测试'
+message['Subject'] = Header(subject, 'utf-8')
+
+try:
+    smtpObj = smtplib.SMTP('localhost')
+    smtpObj.sendmail(sender, receivers, message.as_string())
+    print("邮件发送成功")
+except smtplib.SMTPException:
+    print("Error: 无法发送邮件")
