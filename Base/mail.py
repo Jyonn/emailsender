@@ -2,19 +2,18 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
-# 第三方 SMTP 服务
-mail_host = "mail.6-79.cn"  # 设置服务器
-mail_user = "noreply@mail.6-79.cn"  # 用户名
-mail_pass = "password"  # 口令
+mail_host = "mail.6-79.cn"
+mail_user = "noreply@mail.6-79.cn"
+mail_pass = "password"
 
 sender = 'noreply@mail.6-79.cn'
-receivers = ['i@6-79.cn']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+receivers = ['i@6-79.cn']
 
-message = MIMEText('Python 邮件发送测试...', 'plain', 'utf-8')
-message['From'] = Header("菜鸟教程", 'utf-8')
-message['To'] = Header("测试", 'utf-8')
+message = MIMEText('Python test mail...', 'plain', 'utf-8')
+message['From'] = Header("runoob", 'utf-8')
+message['To'] = Header("for test", 'utf-8')
 
-subject = 'Python SMTP 邮件测试'
+subject = 'Python SMTP mail testing'
 message['Subject'] = Header(subject, 'utf-8')
 
 try:
@@ -24,5 +23,5 @@ try:
     smtpObj.login(mail_user, mail_pass)
     smtpObj.sendmail(sender, receivers, message.as_string())
     print("send success")
-except smtplib.SMTPException:
-    print("Error sending")
+except smtplib.SMTPException as e:
+    print(e)
