@@ -15,6 +15,6 @@ msg['From'] = 'noreply@mail.6-79.cn'
 msg['To'] = 'i@6-79.cn'
 
 # Send the message via our own SMTP server.
-s = smtplib.SMTP('localhost')
+s = smtplib.SMTP('smtp.qq.com')
 s.send_message(msg)
 s.quit()
